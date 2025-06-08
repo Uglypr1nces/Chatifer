@@ -3,9 +3,11 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from .models import User
 
+def index(request):
+    return render(request, "index.html")
+
 def home(request):
     return render(request, "home.html")
-
 
 def login_or_signup(request):
     return render(request, "login.html")

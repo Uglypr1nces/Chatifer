@@ -95,7 +95,7 @@ function logIn() {
                 } else {
                     alert("Greetings " + data);
                     localStorage.setItem("first_name", data);
-                    window.location.href = "/dashboard/";
+                    window.location.href = "/home/";
                 }
             },
             error: function () {

@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatifer</title>
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+
+
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><a href="{% url 'home' %}">Chatifer</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'log_in' %}">login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    {% block body %}
+
+    {% endblock %}
+</body>
+</html>
