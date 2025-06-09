@@ -2,6 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from .models import User
+from .client import ChatClient
 
 def index(request):
     return render(request, "index.html")
@@ -54,3 +55,12 @@ def log_in(request):
      return HttpResponse("Tried Log In")
 
         
+
+
+@csrf_exempt
+def send_msg(request):
+    if request.method == "POST":
+        user_name = request.POST.get("user_name")
+        msg = request.POST.get("msg")
+
+        print(f"{msg} from {user_name}")
