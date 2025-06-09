@@ -12,6 +12,8 @@ def home(request):
 def login_or_signup(request):
     return render(request, "login.html")
 
+def chat(request):
+    return render(request, "chat.html")
 
 @csrf_exempt
 def sign_up(request):

@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-  background-color: #ffffff;
+  background-color: #1f365f;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -9,8 +9,8 @@ body {
 
 /* Header Styles */
 header {
-  background: #ffffff;
-  color: #000000;
+  background: #1f365f;
+  color: #1f365f;
   padding-top: 30px;
   min-height: 70px;
   border-bottom: 5px solid #000000;
