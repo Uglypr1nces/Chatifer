@@ -1,10 +1,27 @@
+#main-content{
+  display: flex;
+}
+
+#chat-server {
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  height: 100%;
+  min-width: 70%;
+  width: 80%;
+  max-width: 90%;
+}
+
+h1{
+  color: #ffa10b;
+}
 label {
   display: block;
   margin: 20px 0 5px 0;
 }
 
 input {
-  width: 100%;
+  width: 80%;
   padding: 10px;
   margin: 5px 0 22px 0;
   display: inline-block;
@@ -31,7 +48,7 @@ input[type="submit"] {
 
 button {
   appearance: button;
-  background-color: #ffffff;
+  background-color: #ffa10b;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
@@ -57,12 +74,12 @@ button {
   -webkit-user-select: none;
   white-space: nowrap;
   width: 20%;
-  position: relative; /* Ensure button pseudo-element is positioned correctly */
+  position: relative; 
 }
 
 button:after {
   background-clip: padding-box;
-  background-color: #606060;
+  background-color: #ff890b;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
