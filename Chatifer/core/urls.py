@@ -13,6 +13,7 @@ urlpatterns = [
     path('signup/log_in/', views.log_in, name="log_in2"),
 
     path('home/', views.home, name="home"),
+    path('home/connect/', views.connect_server, name="connect"),
 
     path('chat',views.chat, name="chat"),
 ]   

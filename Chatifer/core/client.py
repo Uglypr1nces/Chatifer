@@ -5,6 +5,7 @@ class ChatClient:
         self.ADDR = (server, port)
         self.HEADER = 64
         self.FORMAT = "utf-8"
+        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connect(self):  
         self.client.connect(self.ADDR)

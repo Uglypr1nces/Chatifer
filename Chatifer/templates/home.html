@@ -8,6 +8,7 @@
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <script src="{% static 'scripts/home.js' %}"></script>
 {% endblock %}
 <body>
     {% block body%}
@@ -20,7 +21,7 @@
             <input type="text" id="server-ip" name="serverip" placeholder="Enter IP address">
         
             <label for="port">Port Number:</label>
-            <input type="number" id="server-ip" name="port" placeholder="Enter port number">
+            <input type="number" id="server-port" name="port" placeholder="Enter port number">
         
             <button onclick="connectChat()">Connect</button>
         </div>

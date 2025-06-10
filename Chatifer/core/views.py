@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from threading import Thread
 from .models import User
 from .client import ChatClient
 
@@ -58,9 +59,18 @@ def log_in(request):
 
 
 @csrf_exempt
-def send_msg(request):
+def connect_server(request):
     if request.method == "POST":
-        user_name = request.POST.get("user_name")
-        msg = request.POST.get("msg")
+        server_ip = request.POST.get("ip")
+        server_port = int(request.POST.get("port"))
 
-        print(f"{msg} from {user_name}")
+        print(f"connecting to.. {server_ip}, {server_port}")
+
+        user_client = ChatClient(server_ip,server_port)
+        user_client.connect()
+        t = Thread(target=user_client.listen) #create thread to server listener so it doesnt disrupt the rest of the code
+        t.start()
+
+        user_client.send_message("Hello")
+
+        return HttpResponse("Recieved info")

@@ -11,9 +11,6 @@ class Server:
     def add_connection(self, conn, addr):
         self.connections.append(conn)
         print(f"New connection from {addr}, {len(self.connections)} amount of connections")
-        message = f"afXMZhjvchs88vjls.g87satv0q,.7fgy{len(self.connections)}"
-        for connection in self.connections:
-            self.send_message(connection, message)
   
     def remove_connection(self, conn):
         try:
