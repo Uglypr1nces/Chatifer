@@ -9,8 +9,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{% static 'styles/chat.css' %}">
 {% endblock %}
-
-
 <body>
     {% block body %}
         <div id="main-content">
@@ -18,7 +16,12 @@
                 <p>test shi</p>
             </div>
             <div id="main-panel">
-                <p>more test shi</p>
+                <div id="chat-box"></div>
+                    <div id="loading_animation" class="loading">Loading&#8230;</div>
+                    <div id="input-area">
+                    <input type="text" id="input-box" placeholder="Type your message..." />
+                    <button class="send-btn" onclick="sendUserInput()">Send</button>
+                </div>
             </div>
         </div>
     {% endblock %}

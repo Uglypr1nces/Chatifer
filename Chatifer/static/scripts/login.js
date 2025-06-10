@@ -1,18 +1,18 @@
-window.onload = setUser()
+window.onload = setUser;
 
 function setUser() {
-    localStorage.setItem("first_name", null);
-    console.log("Set username to null");
+    localStorage.setItem("user_name", "");
+    console.log("Set username to empty string");
 }
 
 function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
 }
 
 function validateUser(form) {
-    const first_name = form.elements["firstname"].value.trim();
-    const last_name = form.elements["lastname"].value.trim();
+    const first_name = form.elements["first_name"].value.trim();
+    const last_name = form.elements["last_name"].value.trim();
     const email = form.elements["sign-up-email"].value.trim().toLowerCase();
     const password = form.elements["sign-up-password"].value.trim();
     const confirm_password = form.elements["confirm-password"].value.trim();
@@ -38,7 +38,7 @@ function validateUser(form) {
         return false;
     }
 
-    console.log("user valid...")
+    console.log("User is valid.");
     return true;
 }
 
@@ -48,15 +48,16 @@ function signUp(event) {
     const form = document.getElementById("sign-up-form");
 
     if (!validateUser(form)) {
-        alert("Sign up invalid...")
+        alert("Sign up invalid...");
+        form.elements["sign-up-password"].value = "";
+        form.elements["confirm-password"].value = "";
     } else {
-
         const user_data = {
-            first_name: form.elements["firstname"].value.trim(),
-            last_name: form.elements["lastname"].value.trim(),
+            first_name: form.elements["first_name"].value.trim(),
+            last_name: form.elements["last_name"].value.trim(),
             email: form.elements["sign-up-email"].value.trim().toLowerCase(),
             password: form.elements["sign-up-password"].value.trim(),
-        }
+        };
 
         $.ajax({
             type: "POST",
@@ -64,7 +65,8 @@ function signUp(event) {
             data: user_data,
             success: function (response) {
                 console.log("Sign-up successful:", response);
-                alert("Sign up successful, you can now log in")
+                alert("Sign up successful, you can now log in");
+                clearSignUp(); 
             },
             error: function () {
                 alert("Failed to sign up. Please try again later.");
@@ -72,29 +74,27 @@ function signUp(event) {
         });
     }
 }
+
 function logIn() {
     const email = document.getElementById("log-in-email");
     const password = document.getElementById("log-in-password");
 
-    if (
-        !email.value.trim() ||
-        !password.value.trim()
-    ) {
+    if (!email.value.trim() || !password.value.trim()) {
         alert("Please fill in all fields.");
     } else {
         $.ajax({
             type: "POST",
             url: "log_in/",
             data: {
-                email: email.value,
-                password: password.value,
+                email: email.value.trim().toLowerCase(),
+                password: password.value.trim(),
             },
             success: function (data) {
-                if (data == "Couldn't find user") {
-                    alert("User wasnt found, please try again");
+                if (data === "Couldn't find user") {
+                    alert("User wasn't found, please try again");
                 } else {
                     alert("Greetings " + data);
-                    localStorage.setItem("first_name", data);
+                    localStorage.setItem("user_name", data);
                     window.location.href = "/home/";
                 }
             },
@@ -105,12 +105,11 @@ function logIn() {
     }
 }
 
-
 function clearSignUp() {
     const form = document.getElementById("sign-up-form");
 
-    form.elements["firstname"].value = "";
-    form.elements["lastname"].value = "";
+    form.elements["first_name"].value = "";
+    form.elements["last_name"].value = "";
     form.elements["sign-up-email"].value = "";
     form.elements["sign-up-password"].value = "";
     form.elements["confirm-password"].value = "";
