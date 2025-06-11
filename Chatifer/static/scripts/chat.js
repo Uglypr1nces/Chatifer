@@ -31,7 +31,7 @@ function sendUserInput() {
       document.getElementById("input-box").value = ""; // Clear input box
       waiting_animation.style.visibility = "hidden"; // Hide loading animation
     },
-    error: function (xhr, status, error) {
+    error: function (xhr, status, error) { 
       console.error("Error:", error);
       alert("Failed to send message. Please try again.");
       waiting_animation.style.visibility = "hidden"; // Hide loading animation

@@ -15,5 +15,5 @@ urlpatterns = [
     path('home/', views.home, name="home"),
     path('home/connect/', views.connect_server, name="connect"),
 
-    path('chat',views.chat, name="chat"),
+    path('chat/',views.chat, name="chat"),
 ]   
