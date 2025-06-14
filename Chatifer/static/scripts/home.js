@@ -31,7 +31,7 @@ function connectChat() {
         alert("Connected to the server!")
         sessionStorage.setItem("server_ip", server_ip);
         sessionStorage.setItem("server_port", server_port);
-        window.location.href("/chat/")
+        window.location.href = "/chat/";
       },
       error: function () {
         alert("Couldnt connect to server.");

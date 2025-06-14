@@ -19,7 +19,7 @@ def start():
     print(f"SERVER STARTING AT {server}, {port}...")
     while True:
         conn, addr = server_socket.accept()  # Waits for a connection, when a connection occurs it will store the data
-        print(f"received connection request from: {conn, addr}")
+        print(f"{conn, addr} has connected")
         server_manager.add_connection(conn, addr)
         thread = threading.Thread(target=server_manager.handle_client, args=(conn, addr))
         thread.start()

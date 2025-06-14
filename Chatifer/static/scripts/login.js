@@ -1,18 +1,6 @@
-window.onload = setUser;
-
-function setUser() {
-    localStorage.setItem("user_name", "");
-    console.log("Set username to empty string");
-}
-
-function validateEmail(email) {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return regex.test(email);
-}
-
 function validateUser(form) {
-    const first_name = form.elements["first_name"].value.trim();
-    const last_name = form.elements["last_name"].value.trim();
+    const first_name = form.elements["firstname"].value.trim();
+    const last_name = form.elements["lastname"].value.trim();
     const email = form.elements["sign-up-email"].value.trim().toLowerCase();
     const password = form.elements["sign-up-password"].value.trim();
     const confirm_password = form.elements["confirm-password"].value.trim();
@@ -25,10 +13,6 @@ function validateUser(form) {
         alert("Last name must be at least 2 characters.");
         return false;
     }
-    if (!validateEmail(email)) {
-        alert("Invalid email address.");
-        return false;
-    }
     if (password.length < 8) {
         alert("Password must be at least 8 characters.");
         return false;
@@ -38,7 +22,6 @@ function validateUser(form) {
         return false;
     }
 
-    console.log("User is valid.");
     return true;
 }
 
@@ -51,29 +34,30 @@ function signUp(event) {
         alert("Sign up invalid...");
         form.elements["sign-up-password"].value = "";
         form.elements["confirm-password"].value = "";
-    } else {
-        const user_data = {
-            first_name: form.elements["first_name"].value.trim(),
-            last_name: form.elements["last_name"].value.trim(),
-            email: form.elements["sign-up-email"].value.trim().toLowerCase(),
-            password: form.elements["sign-up-password"].value.trim(),
-        };
-
-        $.ajax({
-            type: "POST",
-            url: "sign_up/",
-            data: user_data,
-            success: function (response) {
-                console.log("Sign-up successful:", response);
-                alert("Sign up successful, you can now log in");
-                clearSignUp(); 
-            },
-            error: function () {
-                alert("Failed to sign up. Please try again later.");
-            },
-        });
+        return;
     }
+
+    const user_data = {
+        first_name: form.elements["firstname"].value.trim(),
+        last_name: form.elements["lastname"].value.trim(),
+        email: form.elements["sign-up-email"].value.trim().toLowerCase(),
+        password: form.elements["sign-up-password"].value.trim(),
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "sign_up/",
+        data: user_data,
+        success: function (response) {
+            alert("Sign up successful, you can now log in");
+            clearSignUp();
+        },
+        error: function () {
+            alert("Failed to sign up. Please try again later.");
+        },
+    });
 }
+
 
 function logIn() {
     const email = document.getElementById("log-in-email");
@@ -108,8 +92,8 @@ function logIn() {
 function clearSignUp() {
     const form = document.getElementById("sign-up-form");
 
-    form.elements["first_name"].value = "";
-    form.elements["last_name"].value = "";
+    form.elements["firstname"].value = "";
+    form.elements["lastname"].value = "";
     form.elements["sign-up-email"].value = "";
     form.elements["sign-up-password"].value = "";
     form.elements["confirm-password"].value = "";
