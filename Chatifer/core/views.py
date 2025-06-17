@@ -75,6 +75,7 @@ def connect_server(request):
 @csrf_exempt
 def get_latest_message(request):
     msg = user_client.get_latest_message()
+    print(msg)
     if msg:
         return JsonResponse({"message": msg})
     else:

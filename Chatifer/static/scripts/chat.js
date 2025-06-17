@@ -6,14 +6,8 @@ function sendUserInput() {
     return;
   }
 
-  let chatBox = document.getElementById("chat-box");
-  let userMessageDiv = document.createElement("div");
-  userMessageDiv.classList.add("message", "user-message");
-  userMessageDiv.innerText = user_input;
-  chatBox.appendChild(userMessageDiv);
-
   document.getElementById("input-box").value = "";
-  chatBox.scrollTop = chatBox.scrollHeight;
+
 
   $.ajax({
     type: "POST",
@@ -47,7 +41,7 @@ function pollMessages() {
     },
     error: function (xhr, status, error) {
       console.error("Polling error:", error);
-    },
+    }
   });
 }
 
@@ -60,7 +54,7 @@ function appendServerMessage(message) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-setInterval(pollMessages, 1000);
+setInterval(pollMessages, 1000); //gets the last message from the server every second, which is definetely not the best way to do this
 
 document.addEventListener('keyup', (event) => {
   if (event.key == 'Enter') {

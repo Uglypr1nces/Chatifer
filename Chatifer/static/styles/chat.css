@@ -29,15 +29,11 @@
   font-size: 14px;
 }
 
-.user-message {
+.server-message {
   background-color: #fab112;
-  align-self: flex-end;
+  width: 80%;
 }
 
-.bot-message {
-  background-color: #fab112;
-  align-self: flex-start;
-}
 
 #input-area {
   display: flex;
@@ -80,3 +76,5 @@
   font-style: italic;
   color: #888;
 }
+
+
