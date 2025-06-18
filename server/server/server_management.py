@@ -1,6 +1,3 @@
-import socket
-import threading
-
 class Server:
     def __init__(self, server_socket, FORMAT="utf-8", HEADER=64):
         self.server_socket = server_socket

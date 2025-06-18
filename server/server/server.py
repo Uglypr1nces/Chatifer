@@ -1,8 +1,8 @@
 import socket
 import threading
-from server.server_management import Server
+from server_management import Server
 
-port = 8820
+port = 9246
 server = "localhost"
 HEADER = 64
 ADDR = (server, port)
