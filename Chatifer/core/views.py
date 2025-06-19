@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from threading import Thread
 from .models import User
-from .client import ChatClient, user_client
+from .client import user_client
 
 def index(request):
     return render(request, "index.html")
@@ -61,9 +61,8 @@ def log_in(request):
 def connect_server(request):
     if request.method == "POST":
         server_ip = request.POST.get("ip")
-        server_port = int(request.POST.get("port"))
 
-        user_client.set_server(server_ip, server_port)
+        user_client.set_server(server_ip)
         user_client.connect()
 
         t = Thread(target=user_client.listen)
