@@ -40,8 +40,9 @@ class ChatHandler(http.server.BaseHTTPRequestHandler):
         elif path == "/message":
             # Receive a new message JSON: {"message": "..."}
             try:
-                data = json.loads(body)
-                msg = data.get("message", "")
+                data = parse_qs(body)
+                msg = data.get("message", [""])[0]
+
                 if msg == "!disc":
                     # Client disconnect request
                     self.connected_clients.discard(client_id)

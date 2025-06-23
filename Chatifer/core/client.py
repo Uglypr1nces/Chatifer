@@ -27,7 +27,6 @@ class ChatHttpClient:
             self.server_url = None
 
     def listen(self):
-        # This is a polling simulation — not real-time like sockets
         import time
         while self.server_url:
             try:
@@ -41,7 +40,7 @@ class ChatHttpClient:
     def send_message(self, msg):
         if self.server_url:
             payload = {"message": msg}
-            self.session.post(f"{self.server_url}/message", json=payload)
+            self.session.post(f"{self.server_url}/message", data=payload)
 
 
 
