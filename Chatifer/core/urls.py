@@ -16,6 +16,6 @@ urlpatterns = [
     path('home/connect/', views.connect_server, name="connect"),
 
     path('chat/',views.chat, name="chat"),
-    path('chat/send_message/',views.send_message, name="send_message"),
-    path('chat/get_latest_message/',views.get_latest_message, name="get_latest_message"),
+    path('chat/send_message/', views.send_message, name="send_message"),
+    path('chat/sse_messages/', views.sse_messages, name="sse_messages"),
 ]   

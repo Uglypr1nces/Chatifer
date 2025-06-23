@@ -54,7 +54,17 @@ function appendServerMessage(message) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-setInterval(pollMessages, 1000); //gets the last message from the server every second, which is definetely not the best way to do this
+const eventSource = new EventSource("sse_messages/");
+
+eventSource.onmessage = function (event) {
+  if (event.data) {
+    appendServerMessage(event.data);
+  }
+};
+
+eventSource.onerror = function (error) {
+  console.error("SSE connection error:", error);
+};
 
 document.addEventListener('keyup', (event) => {
   if (event.key == 'Enter') {

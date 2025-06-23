@@ -4,6 +4,10 @@ from django.views.decorators.csrf import csrf_exempt
 from threading import Thread
 from .models import User
 from .client import user_client
+from django.http import StreamingHttpResponse
+import time
+
+latest_message = None
 
 def index(request):
     return render(request, "index.html")
@@ -55,8 +59,6 @@ def log_in(request):
 
      return HttpResponse("Tried Log In")
 
-
-
 @csrf_exempt
 def connect_server(request):
     if request.method == "POST":
@@ -71,21 +73,25 @@ def connect_server(request):
 
         return HttpResponse("Connected to server")
 
+def sse_event_stream():
+    global latest_message
+    previous = ""
+    while True:
+        if latest_message != previous:
+            yield f"data: {latest_message}\n\n"
+            previous = latest_message
+        time.sleep(1)
+
 @csrf_exempt
-def get_latest_message(request):
-    msg = user_client.get_latest_message()
-    print(msg)
-    if msg:
-        return JsonResponse({"message": msg})
-    else:
-        return JsonResponse({"message": None})
-
-
+def sse_messages(request):
+    return StreamingHttpResponse(sse_event_stream(), content_type='text/event-stream')
 
 @csrf_exempt
 def send_message(request):
+    global latest_message
     if request.method == "POST":
         msg = request.POST.get("user_message")
         user_name = request.POST.get("user_name")
-        user_client.send_message(f"{user_name}: {msg}")
+        latest_message = f"{user_name}: {msg}"  # update global message
+        user_client.send_message(latest_message)
         return HttpResponse("Sent message")
