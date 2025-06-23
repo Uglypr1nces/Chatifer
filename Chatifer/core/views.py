@@ -67,10 +67,6 @@ def connect_server(request):
         user_client.set_server(server_ip)
         user_client.connect()
 
-        t = Thread(target=user_client.listen)
-        t.daemon = True 
-        t.start()
-
         return HttpResponse("Connected to server")
 
 def sse_event_stream():

@@ -43,10 +43,7 @@ class ChatHttpClient:
             payload = {"message": msg}
             self.session.post(f"{self.server_url}/message", json=payload)
 
-    def get_latest_message(self):
-        if not self.message_queue.empty():
-            return self.message_queue.get()
-        return None
+
 
 
 user_client = ChatHttpClient()
